@@ -9,6 +9,8 @@ use App\Models\Route;
 use App\Models\Schedule;
 use App\Models\Stop;
 
+use function Illuminate\Log\log;
+
 class BusController extends Controller
 {
     public function findBus(Request $request){
@@ -68,6 +70,7 @@ class BusController extends Controller
                 $response['buses'][$route['route_name']]['next_arrivals'][] = $arrival['arrival_time'];
             }
         }
+        array_slice($response['buses'][$route['route_name']]['next_arrivals'],0,3);
         return response()->json($response);
     }
 }
